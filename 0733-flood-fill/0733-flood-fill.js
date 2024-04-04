@@ -5,21 +5,17 @@
  * @param {number} color
  * @return {number[][]}
  */
-var floodFill = function(image, sr, sc, color) {
-    fill(image, sr, sc, image[sr][sc], color);
-    
-    return image;
-};
-
-const fill = function(image, x, y, oldColor, newColor)  {
-    if (x < 0 || y < 0 || x >= image.length || y >= image[x].length || image[x][y] === newColor || image[x][y] !== oldColor) {
-        return;
+var floodFill = function(image, sr, sc, newColor, oldColor = image[sr][sc]) {
+    if (sr < 0 || sc < 0 || sr >= image.length || sc >= image[sr].length || image[sr][sc] === newColor || image[sr][sc] !== oldColor) {
+        return image;
     }
     
-    image[x][y] = newColor;
+    image[sr][sc] = newColor;
     
-    fill(image, x + 1, y, oldColor, newColor);
-    fill(image, x - 1, y, oldColor, newColor);
-    fill(image, x, y + 1, oldColor, newColor);
-    fill(image, x, y - 1, oldColor, newColor);
-}
+    floodFill(image, sr + 1, sc, newColor, oldColor);
+    floodFill(image, sr - 1, sc, newColor, oldColor);
+    floodFill(image, sr, sc + 1, newColor, oldColor);
+    floodFill(image, sr, sc - 1, newColor, oldColor);
+    
+    return image
+};
