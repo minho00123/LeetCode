@@ -11,20 +11,17 @@
  * @return {boolean}
  */
 var isBalanced = function(root) {
-    const dfs = function(node) {
+    if (!root) {
+        return true;
+    }
+    
+    const height = function(node) {
         if (!node) {
             return 0;
         }
         
-        const left = 1 + dfs(node.left);
-        const right = 1 + dfs(node.right);
-        
-        if (Math.abs(left - right) > 1) {
-            return Infinity;
-        }
-        
-        return Math.max(left, right);
+        return 1 + Math.max(height(node.left), height(node.right));
     }
     
-    return dfs(root) == Infinity ? false : true;
+    return Math.abs(height(root.left) - height(root.right)) < 2 && isBalanced(root.left) && isBalanced(root.right);
 };
