@@ -22,7 +22,7 @@ var solution = function(isBadVersion) {
         let end = n;
         
         while (start < end) {
-            let mid = Math.floor((start + end) / 2);
+            let mid = Math.floor(start + (end - start) / 2);
             
             if (isBadVersion(mid)) {
                 end = mid;
