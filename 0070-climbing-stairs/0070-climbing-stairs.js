@@ -2,20 +2,22 @@
  * @param {number} n
  * @return {number}
  */
-var climbStairs = function(n) {
-    if (n < 4) {
-        return n;
+var climbStairs = function(n, memo = new Array()) {
+    if (n === 1) {
+        return 1;
     }
     
-    let a = 1;
-    let b = 1;
-    let fib;
-    
-    for (let i = 2; i <= n; i++) {
-        fib = a + b;
-        a = b;
-        b = fib;
+    if (n === 2) {
+        return 2;
     }
     
-    return fib;
+    if (memo[n] !== undefined) {
+        return memo[n];
+    }
+    
+    let res = climbStairs(n - 1, memo) + climbStairs(n - 2, memo);
+    
+    memo[n] = res;
+    
+    return res;
 };
