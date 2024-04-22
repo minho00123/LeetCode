@@ -3,20 +3,16 @@
  * @return {number[]}
  */
 var countBits = function(n) {
-    const answer = [];
-
-    for (let i = 0; i <= n; i++) {
-        const binary = i.toString(2);
-        let sum = 0;
-        
-        for (let j = 0; j < binary.length; j++) {
-            if (binary[j] === "1") {
-                sum++;
-            }
+    const result = Array(n + 1).fill(0);
+    let offset = 1;
+    
+    for (let i = 1; i <= n; i++) {
+        if (offset * 2 === i) {
+            offset = i;
         }
         
-        answer.push(sum);
+        result[i] = 1 + result[i - offset];
     }
     
-    return answer;
+    return result;
 };
