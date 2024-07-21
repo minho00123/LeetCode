@@ -14,7 +14,7 @@ var removeOuterParentheses = function(s) {
             
             parenthesesCount++;
         } else {
-             parenthesesCount--;
+            parenthesesCount--;
 
             if (parenthesesCount) {
                 answer += char;
